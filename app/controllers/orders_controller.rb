@@ -59,6 +59,10 @@ class OrdersController < ApplicationController
     render json: params
   end
 
+  def calc
+    render plain: rand(100).floor
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
