@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     member do
       get('approve')
     end
+    collection do
+      get('first')
+    end
   end
 
   get('hello/index')

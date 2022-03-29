@@ -63,6 +63,13 @@ class OrdersController < ApplicationController
     render plain: rand(100).floor
   end
 
+  def first
+    @order = Order.first
+    return render plain: 'empty' unless @order
+
+    render :show
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
