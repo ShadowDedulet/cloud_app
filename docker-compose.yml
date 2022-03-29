@@ -1,0 +1,10 @@
+# Using docker engine 20.10.13
+version: "3.9"
+
+services: 
+  app:
+    image: cloud_app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src
