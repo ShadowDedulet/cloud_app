@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'orders#calc'
 
+  resource :login, only: [:show, :create, :destroy]
+
   resources :users
   resources :orders do
     member do

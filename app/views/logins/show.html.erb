@@ -1,0 +1,19 @@
+<h1>Текущая сессия</h1>
+<p id="notice"><%= notice %></p>
+<% if session[:login] %>
+    <p><strong>Имя:</strong><%= session[:login] %></p>
+    <p><strong>Баланс:</strong><%= session[:balance] %></p>
+    <p>
+        <%= form_with(url: login_path, method: :delete) do %>
+            <%= submit_tag("Выйти") %>
+        <% end %>
+    </p>
+<% else %>
+    <%= form_with(url: "/login") do %>
+        <%= label_tag(:login, "Имя") %>
+        <%= text_field_tag(:login) %>
+        <%= label_tag(:login, "Пароль") %>
+        <%= password_field_tag(:password) %>
+        <%= submit_tag("Вход") %>
+    <% end %>
+<% end %>
