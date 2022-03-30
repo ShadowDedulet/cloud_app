@@ -1,0 +1,4 @@
+Id, Name, Status, Cost
+<% @orders.each do |order| %>
+    <%= order.id %>, <%= order.name %>, <%= order.status %>, <%= order.cost %>
+<% end %>
