@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    puts("\nparams: #{params.inspect}\n")
   end
 
   # GET /orders/1/edit
@@ -19,6 +20,8 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
+    byebug
+
     @order = Order.new(order_params)
 
     respond_to do |format|
