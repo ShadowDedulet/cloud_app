@@ -3,9 +3,26 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
-    @users = User.all
-    @users.first
+    @orders = Order.eager_load(:networks, :tags).map do |order|
+      next unless (order.networks || orders.tags)
+      {
+        name: order.name,
+        created_at: order.created_at,
+        network_count: order.networks.length,
+        tags: order.tags.map { |t| [t.id, t.name] }
+      }
+    end
+
+    # @orders = Order.all.map do |o|
+    #   {
+    #     name: o.name,
+    #     created_at: o.created_at,
+    #     network_count: o.networks.length,
+    #     tags: o.tags.select(:id, :name)
+    #   }
+    # end
+
+    render json: { orders: @orders }
   end
 
   # GET /orders/1 or /orders/1.json
@@ -22,8 +39,6 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    byebug
-
     @order = Order.new(order_params)
 
     respond_to do |format|
