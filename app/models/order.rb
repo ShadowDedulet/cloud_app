@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   # validates :name, length: { maximum: 10 }
-  
+
   scope :high_cost, -> { where(cost: 1000..) }
   scope :vip_failed, -> { failed.high_cost }
   scope :created_before, -> (time) { where('created_at < ?', time) }

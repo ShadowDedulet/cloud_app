@@ -13,15 +13,6 @@ class OrdersController < ApplicationController
       }
     end
 
-    # @orders = Order.all.map do |o|
-    #   {
-    #     name: o.name,
-    #     created_at: o.created_at,
-    #     network_count: o.networks.length,
-    #     tags: o.tags.select(:id, :name)
-    #   }
-    # end
-
     render json: { orders: @orders }
   end
 
@@ -31,7 +22,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    puts("\nparams: #{params.inspect}\n")
   end
 
   # GET /orders/1/edit
@@ -75,20 +65,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def approve
-    render json: params
-  end
-
-  def calc
-    render plain: rand(100).floor
-  end
-
-  def first
-    @order = Order.first
-    return render plain: 'empty' unless @order
-
-    render :show
-  end
 
   private
 
