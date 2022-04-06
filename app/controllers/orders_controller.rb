@@ -65,6 +65,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  # localhost:3000/orders/check?cpu=2&ram=4&hdd_capacity=10&hdd_type=sata&os=windows
+  def check
+    unless (session[:login] && session[:balance])
+      return render json: { return: false, error: "No user-name/balance" }, status: :unauthorized      
+    end
+
+    ret = OrderService.new(params, session).call
+    return render json: ret[:response], status: ret[:status]
+  end
 
   private
 

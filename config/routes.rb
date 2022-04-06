@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     collection do
       get('first')
+      get('check')
     end
   end
 
