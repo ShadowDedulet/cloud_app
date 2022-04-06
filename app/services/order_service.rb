@@ -18,14 +18,14 @@ class OrderService
     fetch_specs
 
     return {
-      reposne: { result: false, error: "Configuration is not available" },
+      response: { result: false, error: "Configuration is not available" },
       status: :not_acceptable
     } unless check_params
 
     total = Integer(get_cost)
 
     return {
-      reposne: { result: false, error: "Insufficient funds" },
+      response: { result: false, error: "Insufficient funds" },
       status: :not_acceptable
     } unless total <= session[:balance]
 
@@ -41,7 +41,7 @@ class OrderService
 
   rescue SocketError, OpenURI::HTTPError
     return {
-      reposne: { result: false, error: "Could not connect to services" },
+      response: { result: false, error: "Could not connect to services" },
       status: :service_unavailable
     }
   end
