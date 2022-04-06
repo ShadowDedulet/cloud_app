@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :first_name, :last_name, format: { with: /[А-Я]+[а-яА-Я]{2,}/ }
+  # validates :first_name, :last_name, format: { with: /[А-Я]+[а-яА-Я]{2,}/ }
 
   scope :first_name_more, -> (len) { where('length(first_name) > :len', len: len) }
   scope :last_name_less, -> (len) { where('length(last_name) < :len', len: len) }
