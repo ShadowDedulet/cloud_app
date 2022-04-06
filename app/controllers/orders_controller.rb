@@ -3,26 +3,11 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.eager_load(:networks, :tags).map do |order|
-      next unless (order.networks || orders.tags)
-      {
-        name: order.name,
-        created_at: order.created_at,
-        network_count: order.networks.length,
-        tags: order.tags.map { |t| [t.id, t.name] }
-      }
-    end
+    page, per_page = 1, 30
+    page = Integer(params[:page]) if params[:page]
+    per_page = Integer(params[:per_page]) if params[:per_page]
 
-    # @orders = Order.all.map do |o|
-    #   {
-    #     name: o.name,
-    #     created_at: o.created_at,
-    #     network_count: o.networks.length,
-    #     tags: o.tags.select(:id, :name)
-    #   }
-    # end
-
-    render json: { orders: @orders }
+    @orders = Order.limit(per_page).offset(per_page * (page - 1)).order(id: :asc)
   end
 
   # GET /orders/1 or /orders/1.json

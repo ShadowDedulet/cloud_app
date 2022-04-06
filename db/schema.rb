@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_170331) do
+ActiveRecord::Schema.define(version: 2022_04_06_180334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_170331) do
     t.datetime "updated_at", precision: 6, null: false
     t.json "options"
     t.bigint "user_id", null: false
+    t.index ["cost"], name: "index_orders_on_cost"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
