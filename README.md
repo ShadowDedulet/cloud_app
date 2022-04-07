@@ -4,9 +4,13 @@
 
 ## Запуск программы
 - Запуск приложения: `docker-compose up`.
-- Выполните команду с флагом `--build`, если образ отсутствует на машине. 
 - Остановка приложения: `docker-compose down` (также удаляет контейнер).
-
+- Установка образов: 
+    ```bash
+    docker pull shadowdedulet/hw4   # установка образа http-сервера
+    docker-compose build            # установка образа сервиса
+    ```
+    
 ## Пример работы
 При переходе по ссылке `http://localhost:3001/orders/check?cpu=4&ram=4&hdd_capacity=50&hdd_type=sata&os=linux` сервис возвращает ответ с кодом 200 в виде json-объекта:
 ```json
