@@ -1,102 +1,49 @@
-# docker-compose run --rm -it -p 3000:3000 app bash
-# docker run --rm -it -p 8080:3000 hw4
-
-require 'uri'
-require 'open-uri'
 require 'json'
 
+# Service providing full logic for 'orders/check'
 class OrderService
   attr_reader :params, :session
 
   def initialize(params, session)
     @session = session
-
-    parse_params(params)
+    @params = params
   end
   
   def call
-    fetch_specs
+    # Parse needed params
+    @params = VmParamsService.parse_params(@params)
 
-    return {
-      response: { result: false, error: "Configuration is not available" },
-      status: :not_acceptable
-    } unless check_params
-
-    total = Integer(get_cost)
-
-    return {
-      response: { result: false, error: "Insufficient funds" },
-      status: :not_acceptable
-    } unless total <= session[:balance]
-
-    return { 
-      response: {
-        result: true,
-        total: total,
-        balance: session[:balance],
-        balance_after_transaction: session[:balance] - total,
-      },
-      status: :ok
-    }
-
-  rescue SocketError, OpenURI::HTTPError
-    return {
-      response: { result: false, error: "Could not connect to services" },
-      status: :service_unavailable
-    }
-  end
-
-  private
-
-  def parse_params(params)
-    raise ArgumentError, "Wrong hdd type" unless %w[sata sas ssd].include?(params[:hdd_type]) 
-    raise ArgumentError, "Wrong os" unless %w[windows linux].include?(params[:os])
-
-    @params = {
-      'os' => params[:os],
-      'cpu' => Integer(params[:cpu]),
-      'ram' => Integer(params[:ram]),
-      'hdd_type' => params[:hdd_type],
-      'hdd_capacity' => Integer(params[:hdd_capacity])
-    }
-  end
-
-
-  def fetch_specs
-    return if session[:specs]
-
-    url = 'http://possible_orders.srv.w55.ru'
-    puts("fetching specs from #{url}...")
-    session[:specs] = JSON.parse(open(url, &:read))['specs']
-  end
-
-
-  def compare(spec)
-    spec.each do |k, v|
-      if k == 'hdd_capacity'
-        type = @params['hdd_type']
-        rng = v[type]['from']..v[type]['to']
-        return false unless rng.include?(@params[k])
-      else
-        return false unless v.include?(@params[k])
-      end
+    # Store available specs in session (fetch if needed)
+    unless session[:specs]
+      data = FetchService.fetch('http://possible_orders.srv.w55.ru')
+      session[:specs] = JSON.parse(data)['specs']
     end
-    true
+
+    # Check if params fir specs
+    unless VmParamsService.check_specs(session[:specs], @params)
+      return ResponseService.call(false, :not_acceptable, error: "Configuration is not available")
+    end
+
+    # Fetch price of given VM
+    total = Integer FetchService.fetch('http://http_server:8080/get_price', @params)
+
+    # Check if VM affordable
+    if total > session[:balance]
+      return ResponseService.call(false, :not_acceptable, error: "Insufficient funds")
+    end
+
+    # Return needed data
+    args = {
+      total: total,
+      balance: session[:balance],
+      balance_after_transaction: session[:balance] - total,
+    }
+    return ResponseService.call(true, :ok, args: args)
+
+  rescue ArgumentError => e
+    return ResponseService.call(false, :unauthorized, error: e)
+  rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED => e
+    return ResponseService.call(false, :service_unavailable, error: e)
   end
 
-
-  def check_params
-    session[:specs].any? { |spec| compare(spec) }
-  end
-
-
-  def get_cost
-    url = 'http://server:8080/get_price'
-    puts("fetching price from #{url}...")
-
-    uri = URI.parse(url)
-    uri.query = URI.encode_www_form(@params)
-
-    open(uri, &:read)
-  end
 end
