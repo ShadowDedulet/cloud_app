@@ -1,0 +1,27 @@
+<%= form_with(model: hdd) do |form| %>
+  <% if hdd.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(hdd.errors.count, "error") %> prohibited this hdd from being saved:</h2>
+
+      <ul>
+        <% hdd.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :hdd_type %>
+    <%= form.text_field :hdd_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.number_field :size %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

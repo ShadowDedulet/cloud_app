@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hdd type:</strong>
+  <%= @hdd.hdd_type %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @hdd.size %>
+</p>
+
+<%= link_to 'Edit', edit_hdd_path(@hdd) %> |
+<%= link_to 'Back', hdds_path %>

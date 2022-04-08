@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Cpu</th>
+      <th>Ram</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vms.each do |vm| %>
+      <tr>
+        <td><%= vm.name %></td>
+        <td><%= vm.cpu %></td>
+        <td><%= vm.ram %></td>
+        <td><%= link_to 'Show', vm %></td>
+        <td><%= link_to 'Edit', edit_vm_path(vm) %></td>
+        <td><%= link_to 'Destroy', vm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vm', new_vm_path %>

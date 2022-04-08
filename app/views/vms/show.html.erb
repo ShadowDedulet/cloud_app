@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vm.name %>
+</p>
+
+<p>
+  <strong>Cpu:</strong>
+  <%= @vm.cpu %>
+</p>
+
+<p>
+  <strong>Ram:</strong>
+  <%= @vm.ram %>
+</p>
+
+<%= link_to 'Edit', edit_vm_path(@vm) %> |
+<%= link_to 'Back', vms_path %>

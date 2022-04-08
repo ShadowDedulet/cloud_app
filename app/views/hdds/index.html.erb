@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Hdds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hdd type</th>
+      <th>Size</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hdds.each do |hdd| %>
+      <tr>
+        <td><%= hdd.hdd_type %></td>
+        <td><%= hdd.size %></td>
+        <td><%= link_to 'Show', hdd %></td>
+        <td><%= link_to 'Edit', edit_hdd_path(hdd) %></td>
+        <td><%= link_to 'Destroy', hdd, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hdd', new_hdd_path %>
