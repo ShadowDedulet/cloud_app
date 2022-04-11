@@ -52,3 +52,14 @@ gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'
+
+gem 'httpclient'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 4.1'
+  gem 'factory_bot_rails'
+  gem 'webmock'
+  gem 'rubocop', require: false
+  gem 'bundler-audit'
+  gem 'simplecov', require: false
+end

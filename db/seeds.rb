@@ -31,10 +31,10 @@
 #  )
 #  end
 
-vm_names = %w[linux-best windows-10 windows-11] 
-project_names = %w[cool-server internship ruby-hello-world] 
-project_states = %w[started development production] 
-hdd_types = %w[sata sas ssd] 
+# vm_names = %w[linux-best windows-10 windows-11] 
+# project_names = %w[cool-server internship ruby-hello-world] 
+# project_states = %w[started development production] 
+# hdd_types = %w[sata sas ssd] 
 
 # vm_names.each do |vm_n|
 #   Vm.create(
@@ -44,22 +44,26 @@ hdd_types = %w[sata sas ssd]
 #   )
 # end
 
-vms = Vm.all
+# vms = Vm.all
 
-project_names.each do |project_n|
-  Project.create(
-    name: project_n,
-    state: project_states.shuffle.first,
-    vms: vms.shuffle.take(rand(2) + 1)
-  )
-end
+# project_names.each do |project_n|
+#   Project.create(
+#     name: project_n,
+#     state: project_states.shuffle.first,
+#     vms: vms.shuffle.take(rand(2) + 1)
+#   )
+# end
 
-hdd_types.each do |hdd_t| 
-  10.times do |i|
-    Hdd.create(
-      hdd_type: hdd_t,
-      size: rand(90) + 10,
-      vm: vms.shuffle.first
-    )
-  end
-end
+# hdd_types.each do |hdd_t| 
+#   10.times do |i|
+#     Hdd.create(
+#       hdd_type: hdd_t,
+#       size: rand(90) + 10,
+#       vm: vms.shuffle.first
+#     )
+#   end
+# end
+
+# 10.times do |i|
+#   Group.create(name: "name_#{i}")
+# end

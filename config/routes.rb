@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   mount GrapeApi => '/api'
   mount GrapeSwaggerRails::Engine => '/swagger'
 

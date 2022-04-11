@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :redirect_not_login
+  # before_action :redirect_not_login
 
 private
 
