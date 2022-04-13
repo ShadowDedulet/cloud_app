@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   mount GrapeApi => '/api'
   mount GrapeSwaggerRails::Engine => '/swagger'
 
+  mount Sidekiq::Web => '/sidekiq'
+
+
   resources :hdds
   resources :vms
   resources :projects

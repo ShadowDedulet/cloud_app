@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.9'
+ruby '2.6.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
@@ -63,3 +63,7 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'simplecov', require: false
 end
+
+gem 'bunny'
+gem 'sidekiq', require: ['sidekiq', 'sidekiq/web']
+gem 'redis'

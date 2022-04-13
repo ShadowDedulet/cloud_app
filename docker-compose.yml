@@ -12,6 +12,9 @@ services:
       - ./:/usr/src
     depends_on:
       - db
+      - redis
+    environment:
+      REDIS_URL: redis://redis:6379/0
 
   db:
     image: postgres:11.5
@@ -21,5 +24,27 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  sidekiq:
+    build: .
+    command: sidekiq
+    volumes:
+      - ./:/usr/src/
+    environment:
+      REDIS_URL: redis://redis:6379/0
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+      - 15672:15672
+    volumes:
+      - rabbit:/var/lib/rabbitmq
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
 volumes:
   postgres:
+  rabbit:
+  redis:
