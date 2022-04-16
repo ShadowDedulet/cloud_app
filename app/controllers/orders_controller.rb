@@ -3,7 +3,8 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    page, per_page = 1, 30
+    page = 1
+    per_page = 30
     page = Integer(params[:page]) if params[:page]
     per_page = Integer(params[:per_page]) if params[:per_page]
 

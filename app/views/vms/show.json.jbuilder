@@ -1,1 +1,1 @@
-json.partial! "vms/vm", vm: @vm
+json.partial! 'vms/vm', vm: @vm

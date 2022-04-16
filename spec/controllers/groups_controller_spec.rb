@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
-
   describe 'GET #index' do
     before(:all) do
       create_list(:group, 5)
@@ -16,7 +15,7 @@ RSpec.describe GroupsController, type: :controller do
       expect(response.status).to eq(200)
       # expect(response).to have_http_status(200)
     end
-    
+
     it 'returns an array body' do
       get :index
       expect(JSON.parse(response.body)).to be_instance_of(Array)
@@ -35,9 +34,8 @@ RSpec.describe GroupsController, type: :controller do
 
     it 'returns a json response' do
       get :index
-      expect(response.content_type).to start_with("application/json")
+      expect(response.content_type).to start_with('application/json')
     end
-
   end
 
   describe 'GET #show' do
@@ -53,13 +51,13 @@ RSpec.describe GroupsController, type: :controller do
       get :show, params: { id: 0 }
       expect(response.status).to eq(404)
     end
-    
+
     it 'returns user with correct params' do
       get :show, params: { id: 1 }
       group = JSON.parse(response.body)
       group.delete('created_at')
       group.delete('updated_at')
-      expect(group).to eq({ 'id' => 1, 'name' => 'group_1'})
+      expect(group).to eq({ 'id' => 1, 'name' => 'group_1' })
     end
   end
 
@@ -94,6 +92,4 @@ RSpec.describe GroupsController, type: :controller do
       expect(response.status).to eq(204)
     end
   end
-
-
 end

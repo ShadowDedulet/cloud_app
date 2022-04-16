@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # %w[fastest slowest db app ballancer rabbitmq sidekiq cache_db].each do
-#   |tag_name| Tag.create(name: tag_name) 
+#   |tag_name| Tag.create(name: tag_name)
 # end
 
 # 10.times do |time|
@@ -31,10 +31,10 @@
 #  )
 #  end
 
-# vm_names = %w[linux-best windows-10 windows-11] 
-# project_names = %w[cool-server internship ruby-hello-world] 
-# project_states = %w[started development production] 
-# hdd_types = %w[sata sas ssd] 
+# vm_names = %w[linux-best windows-10 windows-11]
+# project_names = %w[cool-server internship ruby-hello-world]
+# project_states = %w[started development production]
+# hdd_types = %w[sata sas ssd]
 
 # vm_names.each do |vm_n|
 #   Vm.create(
@@ -54,7 +54,7 @@
 #   )
 # end
 
-# hdd_types.each do |hdd_t| 
+# hdd_types.each do |hdd_t|
 #   10.times do |i|
 #     Hdd.create(
 #       hdd_type: hdd_t,

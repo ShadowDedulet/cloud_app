@@ -1,1 +1,1 @@
-json.array! @hdds, partial: "hdds/hdd", as: :hdd
+json.array! @hdds, partial: 'hdds/hdd', as: :hdd

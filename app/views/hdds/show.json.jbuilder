@@ -1,1 +1,1 @@
-json.partial! "hdds/hdd", hdd: @hdd
+json.partial! 'hdds/hdd', hdd: @hdd

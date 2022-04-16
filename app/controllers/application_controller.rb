@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # before_action :redirect_not_login
 
-private
+  private
 
   def redirect_not_login
     return redirect_to :login unless session[:login]

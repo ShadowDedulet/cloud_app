@@ -1,5 +1,5 @@
 require 'bunny'
-require './app/services/stop_vm_service.rb'
+require './app/services/stop_vm_service'
 
 connection = Bunny.new('amqp://guest:guest@rabbitmq')
 connection.start

@@ -5,13 +5,12 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-
   resources :hdds
   resources :vms
   resources :projects
   root 'orders#calc'
 
-  resource :login, only: [:show, :create, :destroy]
+  resource :login, only: %i[show create destroy]
 
   resources :users
   resources :orders do

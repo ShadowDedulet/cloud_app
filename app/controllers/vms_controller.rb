@@ -1,5 +1,5 @@
 class VmsController < ApplicationController
-  before_action :set_vm, only: %i[ show edit update destroy ]
+  before_action :set_vm, only: %i[show edit update destroy]
 
   # GET /vms or /vms.json
   def index
@@ -16,8 +16,7 @@ class VmsController < ApplicationController
   end
 
   # GET /vms/1 or /vms/1.json
-  def show
-  end
+  def show; end
 
   # GET /vms/new
   def new
@@ -25,8 +24,7 @@ class VmsController < ApplicationController
   end
 
   # GET /vms/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /vms or /vms.json
   def create
@@ -34,7 +32,7 @@ class VmsController < ApplicationController
 
     respond_to do |format|
       if @vm.save
-        format.html { redirect_to vm_url(@vm), notice: "Vm was successfully created." }
+        format.html { redirect_to vm_url(@vm), notice: 'Vm was successfully created.' }
         format.json { render :show, status: :created, location: @vm }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +45,7 @@ class VmsController < ApplicationController
   def update
     respond_to do |format|
       if @vm.update(vm_params)
-        format.html { redirect_to vm_url(@vm), notice: "Vm was successfully updated." }
+        format.html { redirect_to vm_url(@vm), notice: 'Vm was successfully updated.' }
         format.json { render :show, status: :ok, location: @vm }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,19 +59,20 @@ class VmsController < ApplicationController
     @vm.destroy
 
     respond_to do |format|
-      format.html { redirect_to vms_url, notice: "Vm was successfully destroyed." }
+      format.html { redirect_to vms_url, notice: 'Vm was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vm
-      @vm = Vm.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def vm_params
-      params.require(:vm).permit(:name, :cpu, :ram)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vm
+    @vm = Vm.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def vm_params
+    params.require(:vm).permit(:name, :cpu, :ram)
+  end
 end
