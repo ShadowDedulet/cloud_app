@@ -1,0 +1,23 @@
+AllCops:
+  Exclude:
+    - "*shadow*"
+    - "db/schema.rb"
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Max: 100
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
