@@ -38,7 +38,7 @@ class OrderService
     }
     ResponseService.call(true, :ok, args: args)
   rescue ArgumentError => e
-    ResponseService.call(false, :unauthorized, error: e)
+    ResponseService.call(false, :not_acceptable, error: e)
   rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED => e
     ResponseService.call(false, :service_unavailable, error: e)
   end
