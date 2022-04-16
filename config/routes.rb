@@ -14,11 +14,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :orders do
-    member do
-      get('approve')
-    end
     collection do
-      get('first')
+      get('check')
     end
   end
 

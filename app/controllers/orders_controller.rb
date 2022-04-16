@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    puts("\nparams: #{params.inspect}\n")
   end
 
   # GET /orders/1/edit
@@ -61,19 +60,14 @@ class OrdersController < ApplicationController
     end
   end
 
-  def approve
-    render json: params
-  end
+  def check
+    unless session[:login] && session[:balance]
+      ret = ResponseService.call(false, :unauthorized, error: 'No user-name/balance')
+      return render json: ret[:response], status: ret[:status]
+    end
 
-  def calc
-    render plain: rand(100).floor
-  end
-
-  def first
-    @order = Order.first
-    return render plain: 'empty' unless @order
-
-    render :show
+    ret = OrderService.new(params, session).call
+    render json: ret[:response], status: ret[:status]
   end
 
   private
