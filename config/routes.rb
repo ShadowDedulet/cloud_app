@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :hdds
   resources :vms
   resources :projects
-  root 'orders#calc'
 
   resource :login, only: %i[show create destroy]
 
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
   resources :orders do
     collection do
       get('check')
+      get('change_status')
     end
   end
 

@@ -70,6 +70,23 @@ class OrdersController < ApplicationController
     render json: ret[:response], status: ret[:status]
   end
 
+  def change_status
+    raise ArgumentError, 'Empty id' unless params[:id]
+    raise ArgumentError, 'Empty status' unless params[:status]
+
+    order = Order.find(params[:id].to_i)
+    order.status = params[:status]
+    order.save
+
+    ret = ResponseService.call(true, :ok)
+  rescue ActiveRecord::RecordNotFound => e
+    ret = ResponseService.call(false, :not_acceptable, error: "Invalid id #{e}")
+  rescue ArgumentError => e
+    ret = ResponseService.call(false, :not_acceptable, error: e)
+  ensure
+    render json: ret[:response], status: ret[:status]
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
