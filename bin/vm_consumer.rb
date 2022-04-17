@@ -1,14 +1,15 @@
 require 'bunny'
-require './app/services/stop_vm_service'
+require './app/services/change_vm_status_service'
 
 connection = Bunny.new('amqp://guest:guest@rabbitmq')
 connection.start
 
 channel = connection.create_channel(nil, 16)
-queue = channel.queue('vm.control', auto_delete: true)
+queue = channel.queue('vm_status', auto_delete: true)
 
+puts('subscribing..')
 queue.subscribe do |_delivery_info, _metadata, payload|
-  StopVmService.call(payload)
+  ChangeVmStatusService.call(payload)
 end
 
 Signal.trap('INT') do
