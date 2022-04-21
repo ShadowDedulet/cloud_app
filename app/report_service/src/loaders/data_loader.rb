@@ -8,7 +8,8 @@ module DataLoader
     CSV.read(path_to_prices).each { |price_data| Prices.add_price(price_data) }
     CSV.read(path_to_vms).each { |vm_data| Supervisor.add_virtual_machine(vm_data) }
     CSV.read(path_to_vols).each { |vol_data| Supervisor.add_volume(vol_data) }
+    true
   rescue ArgumentError => e
-    puts("Error: #{e}")
+    puts("Warning: #{e}")
   end
 end

@@ -9,21 +9,21 @@ module Reporter
     vm_and_price.first(amount)
   end
 
-  def self.find_by_capacity(amount = Supervisor.VMS.length, type, ascending: false)
+  def self.find_by_capacity(amount = Supervisor.length, type, ascending: false)
     vm_and_capacity =
       Supervisor.vms.map { |_id, vm| [vm, get_vm_capacity(vm, type)] }.sort_by { |vm, cap| [cap, vm.id] }
     vm_and_capacity.reverse! unless ascending
     vm_and_capacity.first(amount)
   end
 
-  def self.find_by_volumes_amount(amount = Supervisor.VMS.length, hdd_type = nil, ascending: false)
+  def self.find_by_volumes_amount(amount = Supervisor.length, hdd_type = nil, ascending: false)
     vm_and_capacity =
       Supervisor.vms.map { |_id, vm| [vm, get_vm_vols_amount(vm, hdd_type)] }.sort_by { |vm, cap| [cap, vm.id] }
     vm_and_capacity.reverse! unless ascending
     vm_and_capacity.first(amount)
   end
 
-  def self.find_by_volumes_capacity(amount = Supervisor.VMS.length, hdd_type = nil, ascending: false)
+  def self.find_by_volumes_capacity(amount = Supervisor.length, hdd_type = nil, ascending: false)
     vm_and_capacity =
       Supervisor.vms.map { |_id, vm| [vm, get_vm_vols_capacity(vm, hdd_type)] }.sort_by { |vm, cap| [cap, vm.id] }
     vm_and_capacity.reverse! unless ascending
