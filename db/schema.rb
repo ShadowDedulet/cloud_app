@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_21_130322) do
+ActiveRecord::Schema.define(version: 2022_04_21_144505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,9 +80,12 @@ ActiveRecord::Schema.define(version: 2022_04_21_130322) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "report_type"
-    t.integer "vm_amount"
+    t.integer "report_type", null: false
+    t.integer "vm_amount", null: false
+    t.integer "unit_type"
+    t.boolean "ascending"
     t.json "output"
+
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
