@@ -1,6 +1,4 @@
 class LoginsController < ApplicationController
-  skip_before_action :redirect_not_login
-
   def show; end
 
   def create
