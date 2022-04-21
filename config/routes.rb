@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  resources :reports
   resources :groups
   mount GrapeApi => '/api'
   mount GrapeSwaggerRails::Engine => '/swagger'
 
   mount Sidekiq::Web => '/sidekiq'
 
+  resources :reports
+  
   resources :hdds
   resources :vms
   resources :projects

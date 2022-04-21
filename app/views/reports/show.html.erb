@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Report type:</strong>
+  <%= @report.report_type %>
+</p>
+
+<p>
+  <strong>Vm amount:</strong>
+  <%= @report.vm_amount %>
+</p>
+
+<p>
+  <strong>Output:</strong>
+  <%= @report.output %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>
